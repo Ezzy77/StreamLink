@@ -1,6 +1,7 @@
 package com.elisiocabral.stream_link.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 public class User {
     @Id
+    @GeneratedValue
     private Long userId;
     private String firstName;
     private String lastName;
@@ -64,4 +66,6 @@ public class User {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
+
 }
