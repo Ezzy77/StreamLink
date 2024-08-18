@@ -1,8 +1,13 @@
 package com.elisiocabral.stream_link.service;
 
 import com.elisiocabral.stream_link.websocket.WebSocketHandler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class WebRTCSignalingService {
@@ -33,20 +38,48 @@ public class WebRTCSignalingService {
     }
 
     private String createOfferMessage(String fromUserId, String offer) {
-        // Create JSON message for offer
-        return null;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> message =  new HashMap<>();
+            message.put("fromUserId", fromUserId);
+            message.put("offer", offer);
+            return objectMapper.writeValueAsString(message);
+
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private String createAnswerMessage(String fromUserId, String answer) {
         // Create JSON message for answer
-        return null;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> message =  new HashMap<>();
+            message.put("fromUserId", fromUserId);
+            message.put("answer", answer);
+            return objectMapper.writeValueAsString(message);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     private String createIceCandidateMessage(String fromUserId, String candidate) {
         // Create JSON message for ICE candidate
-        return null;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> message =  new HashMap<>();
+            message.put("fromUserId", fromUserId);
+            message.put("candidate", candidate);
+            return objectMapper.writeValueAsString(message);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
-
 
 }

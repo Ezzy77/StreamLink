@@ -17,18 +17,17 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
-
-    WebRTCSignalingService webRTCSignalingService;
+    private final WebRTCSignalingService webRTCSignalingService;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
 
 
-//    @Autowired
-//    public WebSocketHandler(WebRTCSignalingService webRTCSignalingService) {
-//        this.webRTCSignalingService = webRTCSignalingService;
-//    }
+    @Autowired
+    public WebSocketHandler(WebRTCSignalingService webRTCSignalingService) {
+        this.webRTCSignalingService = webRTCSignalingService;
+    }
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
@@ -47,18 +46,18 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String toUserId = jsonNode.get("toUserId").asText();
 
         switch (type) {
-            case "offer":
+            case "offer" -> {
                 String offer = jsonNode.get("offer").asText();
                 webRTCSignalingService.handleOffer(fromUserId, toUserId, offer);
-                break;
-            case "answer":
+            }
+            case "answer" -> {
                 String answer = jsonNode.get("answer").asText();
                 webRTCSignalingService.handleAnswer(fromUserId, toUserId, answer);
-                break;
-            case "ice-candidate":
+            }
+            case "ice-candidate" -> {
                 String candidate = jsonNode.get("candidate").asText();
                 webRTCSignalingService.handleIceCandidate(fromUserId, toUserId, candidate);
-                break;
+            }
             // Handle other message types
         }
 
