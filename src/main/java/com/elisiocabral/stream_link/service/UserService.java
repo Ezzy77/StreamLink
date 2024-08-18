@@ -12,15 +12,17 @@ import java.util.UUID;
 @Service
 public class UserService{
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
 
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     public User save(UserDTO userDTO){
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword()); // Ensure this is hashed before storing
         user.setCreatedAt(new Timestamp(System.currentTimeMillis()));
         return userRepository.save(user);
     }

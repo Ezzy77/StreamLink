@@ -21,7 +21,6 @@ public class User {
     @Column(name="last_name")
     private String lastName;
     private String email;
-    private String password;
     @Column(name="created_at")
     private Timestamp createdAt;
 
@@ -33,16 +32,15 @@ public class User {
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, Timestamp createdAt){
+    public User(String firstName, String lastName, String email,Timestamp createdAt){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.createdAt = createdAt;
     }
 
     public String toString(){
-        return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", dateOfBirth=" + createdAt + "]";
+        return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email +  ",dateOfBirth=" + createdAt + "]";
     }
 
 
