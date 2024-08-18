@@ -1,78 +1,39 @@
 package com.elisiocabral.stream_link.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.util.UUID;
 
+@Data
 @Entity
+@Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="id")
+    private UUID userId;
+    @Column(name="first_name")
     private String firstName;
+    @Column(name="last_name")
     private String lastName;
     private String email;
     private String password;
-    private LocalDate dateOfBirth;
+    @Column(name="created_at")
+    private Timestamp createdAt;
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, LocalDate dateOfBirth){
+    public User(String firstName, String lastName, String email, String password, Timestamp createdAt){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        this.createdAt = createdAt;
     }
 
     public String toString(){
-        return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", dateOfBirth=" + dateOfBirth + "]";
+        return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password + ", dateOfBirth=" + createdAt + "]";
     }
-
-
-
-
 }
